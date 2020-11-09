@@ -1,0 +1,26 @@
+{
+  "name": "engie",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "NODE_ENV=development && parcel ./engine/engine.html & wait-on http://localhost:1234 && electron app.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "build": {
+    "appId": "engie",
+    "files": [
+      "dist/**/*",
+      "assets/"
+    ]
+  },
+  "devDependencies": {
+    "electron": "^6.0.11",
+    "sass": "^1.29.0"
+  },
+  "dependencies": {
+    "parcel-bundler": "^1.12.3",
+    "wait-on": "^3.3.0"
+  }
+}
