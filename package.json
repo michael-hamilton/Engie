@@ -2,9 +2,14 @@
   "name": "engie",
   "version": "0.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "main.js",
   "scripts": {
-    "dev": "NODE_ENV=development && parcel ./engine/engine.html & wait-on http://localhost:1234 && electron app.js"
+    "parcelDev": "parcel app/index.html",
+    "electronDev": "cross-env NODE_ENV=development electron .",
+    "dev": "npm-run-all --parallel parcelDev electronDev",
+    "parcelBuild": "parcel build app/index.html --target electron --public-url ./",
+    "electronBuild": "electron-builder --dir",
+    "package": "npm-run-all --sequential parcelBuild electronBuild"
   },
   "author": "",
   "license": "MIT",
@@ -19,11 +24,16 @@
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
+    "cross-env": "^7.0.3",
     "electron": "^6.0.11",
+    "electron-builder": "^22.11.7",
     "sass": "^1.29.0"
   },
   "dependencies": {
+    "@trinkets/noise": "0.0.4",
+    "npm-run-all": "^4.1.5",
     "parcel-bundler": "^1.12.3",
+    "simplex-noise": "^2.4.0",
     "wait-on": "^3.3.0"
   }
 }
