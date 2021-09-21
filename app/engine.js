@@ -8,14 +8,14 @@ class Engie {
     this.canvas = canvas;
     this.ctx = this.canvas.getContext("2d");
     this.noise = [];
-    this.mapWidth = 720;
-    this.mapHeight = 720;
+    this.mapWidth = 1500;
+    this.mapHeight = 1000;
     this.windowWidth = window.innerWidth;
     this.windowHeight = window.innerHeight;
     this.imageData = this.ctx.createImageData(this.windowWidth, this.windowHeight);
     this.originX = 0;
     this.originY = 0;
-    this.scrollSpeed = 8;
+    this.scrollSpeed = 2;
     this.isScrolling = false;
     this.scrollStartX = 0;
     this.scrollStartY = 0;
@@ -27,7 +27,7 @@ class Engie {
       field: 0.42,
       grass: 0.60,
       forest: 0.85,
-      rock: 0.90,
+      rock: 0.99,
       mountain: 1,
     };
   }
@@ -118,8 +118,8 @@ class Engie {
         const nx = x / xSize - this.baseHeight;
         const ny = y / ySize - this.baseHeight;
         const normalize = (e) => (e - (-1)) / (1 - (-1));
-        const noi =  (1 * p.noise(4* nx, 4 * ny, 1) +  0.5 * p.noise(4 * nx, 4 * ny, 1)) / (1.2);
-        this.noise[y].push(Math.pow(noi, 2));
+        const noi =  normalize(1 * p.noise(2 * nx, 2 * ny, 1) +  0.5 * p.noise(4 * nx, 4 * ny, 1));
+        this.noise[y].push(Math.pow(noi, 8));
       }
     }
   }
@@ -203,10 +203,11 @@ class Engie {
 
         // Mountain
         else if (n < this.heightThresholdMap.mountain) {
-          color[0] = 114;
-          color[1] = 85;
-          color[2] = 69;
+          color[0] = 136;
+          color[1] = 128;
+          color[2] = 132;
           color[3] = 255;
+          // #000000
         }
 
         // Snow
